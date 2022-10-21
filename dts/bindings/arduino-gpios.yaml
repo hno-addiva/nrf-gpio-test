@@ -1,0 +1,29 @@
+  description: Definition for Arduino GPIO pins
+  compatible: "arduino-gpios"
+
+  properties:
+    analog-gpios:
+      type: phandle-array
+      required: false
+      description: |
+        Analog GPIOs
+    digital-gpios:
+      type: phandle-array
+      required: false
+      description: |
+        Digital GPIOs
+    tx-gpios:
+      type: phandle-array
+      required: false
+      description: |
+        TX GPIOs
+    rx-gpios:
+      type: phandle-array
+      required: false
+      description: |
+        RX GPIOs
+    de-gpios:
+      type: phandle-array
+      required: false
+      description: |
+        DE GPIOs

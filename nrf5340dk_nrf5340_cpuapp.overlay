@@ -1,0 +1,35 @@
+
+/* Dummy GPIO mapping */
+
+/ {
+
+    arduino_gpios: somenode {
+        status = "okay";
+        compatible = "arduino-gpios";
+        analog-gpios =  <&arduino_header 0 GPIO_ACTIVE_HIGH>, // A0
+                    <&arduino_header 1 GPIO_ACTIVE_HIGH>, // A1
+                    <&arduino_header 2 GPIO_ACTIVE_HIGH>, // A2
+                    <&arduino_header 3 GPIO_ACTIVE_HIGH>, // A3
+                    <&arduino_header 4 GPIO_ACTIVE_HIGH>, // A4
+                    <&arduino_header 5 GPIO_ACTIVE_HIGH>; // A5
+    digital-gpios = <&arduino_header 6 GPIO_ACTIVE_HIGH>, // D0
+                    <&arduino_header 7 GPIO_ACTIVE_HIGH>, // D1
+                    <&arduino_header 8 GPIO_ACTIVE_HIGH>, // D2
+                    <&arduino_header 9 GPIO_ACTIVE_HIGH>, // D3
+                    <&arduino_header 10 GPIO_ACTIVE_HIGH>, // D4
+                    <&arduino_header 11 GPIO_ACTIVE_HIGH>, // D5
+                    <&arduino_header 12 GPIO_ACTIVE_HIGH>, // D6
+                    <&arduino_header 13 GPIO_ACTIVE_HIGH>, // D7
+                    <&arduino_header 14 GPIO_ACTIVE_HIGH>, // D8
+                    <&arduino_header 15 GPIO_ACTIVE_HIGH>, // D9
+                    <&arduino_header 16 GPIO_ACTIVE_HIGH>, // D10
+                    <&arduino_header 17 GPIO_ACTIVE_HIGH>, // D11
+                    <&arduino_header 18 GPIO_ACTIVE_HIGH>, // D12
+                    <&arduino_header 19 GPIO_ACTIVE_HIGH>, // D13
+                    <&arduino_header 20 GPIO_ACTIVE_HIGH>, // D14
+                    <&arduino_header 21 GPIO_ACTIVE_HIGH>; // D15
+    rx-gpios =      <&gpio1 00 GPIO_ACTIVE_HIGH>;
+    tx-gpios =      <&gpio1 01 GPIO_ACTIVE_HIGH>;
+    de-gpios =      <&gpio0 11 GPIO_ACTIVE_HIGH>; 
+    };
+};
