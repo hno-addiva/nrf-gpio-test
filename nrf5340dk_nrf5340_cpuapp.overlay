@@ -1,5 +1,18 @@
+&arduino_spi {
+	status = "okay";
 
-/* Dummy GPIO mapping */
+	cs-gpios = <&arduino_header 13 GPIO_ACTIVE_LOW>,		/* D7 */
+				<&arduino_header 16 GPIO_ACTIVE_LOW>;		/* D10 */
+	gpioext: mcp23s08@1 {
+		compatible = "microchip,mcp23sxx";
+		reg = <0x1>;
+		spi-max-frequency = <300000>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		ngpios = <8>;
+		gpio-line-names = "GPEXT0", "GPEXT1", "GPEXT2", "GPEXT3", "GPEXT4", "GPEXT5", "GPEXT6", "GPEXT7";
+	};
+};
 
 / {
 
@@ -28,8 +41,21 @@
                     <&arduino_header 19 GPIO_ACTIVE_HIGH>, // D13
                     <&arduino_header 20 GPIO_ACTIVE_HIGH>, // D14
                     <&arduino_header 21 GPIO_ACTIVE_HIGH>; // D15
-    rx-gpios =      <&gpio1 00 GPIO_ACTIVE_HIGH>;
-    tx-gpios =      <&gpio1 01 GPIO_ACTIVE_HIGH>;
-    de-gpios =      <&gpio0 11 GPIO_ACTIVE_HIGH>; 
+    rx-gpios =      <&gpio1 00 GPIO_ACTIVE_HIGH>,          // UART1 RX
+                    <&gpio0 22 GPIO_ACTIVE_HIGH>,          // UART2 RX
+                    <&gpio0 5 GPIO_ACTIVE_HIGH>,           // EXT1 GPIO1_RX
+                    <&gpio0 7 GPIO_ACTIVE_HIGH>;           // EXT2 GPIO1_RX
+    tx-gpios =      <&gpio1 01 GPIO_ACTIVE_HIGH>,          // UART1_TX
+                    <&gpio0 20 GPIO_ACTIVE_HIGH>,          // UART2_TX
+                    <&gpio0 6 GPIO_ACTIVE_HIGH>,           // EXT1 GPIO2_TX
+                    <&gpio0 25 GPIO_ACTIVE_HIGH>;          // EXT2 GPIO1_TX
+    de-gpios =      <&gpio0 11 GPIO_ACTIVE_HIGH>,          // UART1_RTS
+                    <&gpio0 19 GPIO_ACTIVE_HIGH>,          // UART2_RTS
+                    <&gpio1 10 GPIO_ACTIVE_HIGH>,          // EXT1 CS
+                    <&gpio1 11 GPIO_ACTIVE_HIGH>;          // EXT2 CS
+    re-gpios =      <0>,                                   // N/A
+                    <0>,                                   // N/A
+                    <&gpioext 0 GPIO_ACTIVE_HIGH>,         // EXT1 IRQ
+                    <&gpioext 1 GPIO_ACTIVE_HIGH>;         // EXT2 IRQ
     };
 };

@@ -52,9 +52,20 @@ struct gpio {
     {"D13", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), digital_gpios, 13), MODE_BIDIR},
     {"D14", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), digital_gpios, 14), MODE_BIDIR},
     {"D15", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), digital_gpios, 15), MODE_BIDIR},
-    {"TX", GPIO_DT_SPEC_GET(DT_NODELABEL(arduino_gpios), tx_gpios), MODE_BIDIR},
-    {"RX", GPIO_DT_SPEC_GET(DT_NODELABEL(arduino_gpios), rx_gpios), MODE_BIDIR},
-    {"DE", GPIO_DT_SPEC_GET(DT_NODELABEL(arduino_gpios), de_gpios), MODE_BIDIR},
+    {"TX", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), tx_gpios, 0), MODE_BIDIR},
+    {"RX", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), rx_gpios, 0), MODE_BIDIR},
+    {"DE", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), de_gpios, 0), MODE_BIDIR},
+    {"TX2", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), tx_gpios, 1), MODE_BIDIR},
+    {"RX2", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), rx_gpios, 1), MODE_BIDIR},
+    {"DE2", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), de_gpios, 1), MODE_BIDIR},
+    {"E1TX", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), tx_gpios, 2), MODE_BIDIR},
+    {"E1RX", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), rx_gpios, 2), MODE_BIDIR},
+    {"E1DE", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), de_gpios, 2), MODE_BIDIR},
+    {"E1RE", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), re_gpios, 2), MODE_BIDIR},
+    {"E2TX", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), tx_gpios, 3), MODE_BIDIR},
+    {"E2RX", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), rx_gpios, 3), MODE_BIDIR},
+    {"F2DE", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), de_gpios, 3), MODE_BIDIR},
+    {"E2RE", GPIO_DT_SPEC_GET_BY_IDX(DT_NODELABEL(arduino_gpios), re_gpios, 3), MODE_BIDIR},
 };
 
 static int mode_to_gpio(enum gpio_mode mode)
@@ -74,9 +85,11 @@ static int mode_to_gpio(enum gpio_mode mode)
 
 void main(void)
 {
+    #if 0
     for (int i = 0; i < ARRAY_SIZE(gpios); i++) {
         gpio_pin_configure_dt(&gpios[i].gpio, mode_to_gpio(gpios[i].mode));
     }
+    #endif
 }
 
 static struct gpio * find_gpio(const char *name)
@@ -93,7 +106,7 @@ static int do_set(struct gpio *gpio, bool value)
 {
     if (!gpio)
         return -1;
-    if (gpio->mode == MODE_BIDIR)
+    //if (gpio->mode == MODE_BIDIR)
         gpio_pin_configure_dt(&gpio->gpio, GPIO_OUTPUT);
     return gpio_pin_set_dt(&gpio->gpio, value);
 }
@@ -103,7 +116,7 @@ static int do_get(struct gpio *gpio)
 {
     if (!gpio)
         return -1;
-    if (gpio->mode == MODE_BIDIR)
+    //if (gpio->mode == MODE_BIDIR)
         gpio_pin_configure_dt(&gpio->gpio, GPIO_INPUT);
     return gpio_pin_get_dt(&gpio->gpio);
 }

@@ -27,3 +27,8 @@
       required: false
       description: |
         DE GPIOs
+    re-gpios:
+      type: phandle-array
+      required: false
+      description: |
+        RE GPIOs
